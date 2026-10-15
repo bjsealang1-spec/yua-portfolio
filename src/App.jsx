@@ -41,8 +41,7 @@ const projects = [
     ],
     icon: '🚘',
     github: 'https://github.com/bjsealang1-spec/OilAndCharge',
-    contribution:
-      '팀 프로젝트 · 프론트엔드 담당',
+    contribution: '팀 프로젝트 · 프론트엔드 담당',
     details: [
       '주변 주유소 검색 및 카카오맵 마커 표시',
       '차량 등록 및 등록 차량 목록 조회',
@@ -54,13 +53,36 @@ const projects = [
   },
   {
     number: '04',
-    name: 'Work Helper',
-    category: 'BACKEND / WEB SERVICE',
+    name: 'WorkHelper',
+    category: 'AI / FULL-STACK TEAM PROJECT',
     description:
-      'Spring Boot 기반 노동 상담 웹 서비스입니다. 케이스 관리 및 상담 메시지 기능을 구현하고 PostgreSQL과 JWT 인증을 활용했습니다.',
-    stack: ['Java', 'Spring Boot', 'PostgreSQL', 'JWT', 'REST API'],
+      'Spring Boot 기반 노동 상담 웹 서비스입니다. 상담 케이스 관리 및 상담 메시지 기능을 구현하고 PostgreSQL과 JWT 인증을 활용했습니다.',
+    stack: [
+      'Java',
+      'Spring Boot',
+      'Spring Security',
+      'JWT',
+      'PostgreSQL',
+      'React',
+      'AI',
+    ],
     icon: '⚖️',
     github: 'https://github.com/workhelper-team/work-helper-backend',
+    contribution: '팀 프로젝트 · 백엔드 담당',
+    repositories: [
+      {
+        name: 'Frontend',
+        url: 'https://github.com/workhelper-team/work-helper-frontend',
+      },
+      {
+        name: 'Backend',
+        url: 'https://github.com/workhelper-team/work-helper-backend',
+      },
+      {
+        name: 'AI Service',
+        url: 'https://github.com/workhelper-team/work-helper-ai',
+      },
+    ],
   },
 ]
 
@@ -84,6 +106,14 @@ const skills = [
 ]
 
 function App() {
+  const oilProject = projects.find(
+    (project) => project.name === 'OilAndCharge',
+  )
+
+  const workHelperProject = projects.find(
+    (project) => project.name === 'WorkHelper',
+  )
+
   return (
     <div className="portfolio">
       <header className="navbar">
@@ -114,7 +144,7 @@ function App() {
             <h1>
               AI와 웹을 연결하는
               <br />
-              <span>개발자, 홍동연입니다.</span>
+              <span>개발자입니다.</span>
             </h1>
 
             <p className="hero-description">
@@ -220,6 +250,7 @@ function App() {
 
                 <span className="project-category">{project.category}</span>
                 <h3>{project.name}</h3>
+
                 <p className="project-description">
                   {project.description}
                 </p>
@@ -253,21 +284,50 @@ function App() {
             </p>
 
             <ul>
-              {projects
-                .find((project) => project.name === 'OilAndCharge')
-                .details.map((detail) => (
-                  <li key={detail}>{detail}</li>
-                ))}
+              {oilProject.details.map((detail) => (
+                <li key={detail}>{detail}</li>
+              ))}
             </ul>
 
             <a
               className="secondary-button"
-              href="https://github.com/bjsealang1-spec/OilAndCharge"
+              href={oilProject.github}
               target="_blank"
               rel="noopener noreferrer"
             >
               OilAndCharge 저장소 보기 ↗
             </a>
+          </section>
+
+          <section className="project-detail">
+            <span className="section-label">FEATURED TEAM PROJECT</span>
+            <h3>WorkHelper — AI 기반 노동 상담 서비스</h3>
+            <p>
+              노동 상담 케이스 관리와 상담 메시지 기능을 구현한 팀 프로젝트입니다.
+              프론트엔드, 백엔드, AI 서비스의 저장소를 각각 확인할 수 있습니다.
+            </p>
+
+            <ul>
+              <li>LaborCase 기반 상담 케이스 관리</li>
+              <li>ConsultationMessage 기반 상담 메시지 저장 및 관리</li>
+              <li>PostgreSQL 데이터베이스 연동</li>
+              <li>JWT 기반 인증 구조 활용</li>
+              <li>프론트엔드·백엔드·AI 서비스 분리 구조</li>
+            </ul>
+
+            <div className="hero-actions">
+              {workHelperProject.repositories.map((repository) => (
+                <a
+                  className="secondary-button"
+                  key={repository.name}
+                  href={repository.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {repository.name} ↗
+                </a>
+              ))}
+            </div>
           </section>
         </section>
 
